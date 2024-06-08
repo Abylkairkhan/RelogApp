@@ -1,4 +1,4 @@
-package kz.abyl.relogapp.presentation.sign_in
+package kz.abyl.relogapp.presentation.sign_up
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.sp
 import kz.abyl.relogapp.R
 
 @Composable
-fun SignInScreen(
+fun SignUpScreen(
 
 ) {
     var username by remember { mutableStateOf("") }
@@ -84,7 +84,7 @@ fun SignInScreen(
                 .padding(horizontal = 12.dp)
         ) {
             Text(
-                text = "Login",
+                text = "Register",
                 fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                 fontSize = 36.sp,
                 color = colorResource(id = R.color.blue)
@@ -134,7 +134,10 @@ fun SignInScreen(
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val visibilityIcon = if (passwordVisibility) painterResource(id = R.drawable.visibility_off_icon) else painterResource(id = R.drawable.visibility_icon)
+                    val visibilityIcon =
+                        if (passwordVisibility) painterResource(id = R.drawable.visibility_off_icon) else painterResource(
+                            id = R.drawable.visibility_icon
+                        )
                     IconButton(
                         onClick = { passwordVisibility = !passwordVisibility }
                     ) {
@@ -147,12 +150,6 @@ fun SignInScreen(
                         )
                     }
                 }
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "Forgot Password?",
-                color = colorResource(id = R.color.blue),
-                modifier = Modifier.align(Alignment.End) // Align the text to the bottom end
             )
         }
         Box(
@@ -176,7 +173,7 @@ fun SignInScreen(
                 onClick = { /*TODO*/ }
             ) {
                 Text(
-                    text = "Login",
+                    text = "Register",
                     fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                     fontSize = 24.sp,
                     color = Color.White
@@ -188,7 +185,7 @@ fun SignInScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "New Here?",
+                    text = "Already Member?",
                     fontFamily = FontFamily(Font(R.font.nunito_medium)),
                     fontSize = 16.sp,
                     color = Color.White
@@ -199,7 +196,7 @@ fun SignInScreen(
                         .clickable {
                             TODO()
                         },
-                    text = "Register",
+                    text = "Login",
                     fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                     fontSize = 16.sp,
                     color = Color.White
@@ -224,7 +221,7 @@ fun SignInScreen(
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
+                        contentAlignment = Alignment.Center
                     ) {
                         Image(
                             modifier = Modifier.size(30.dp),
@@ -246,7 +243,7 @@ fun SignInScreen(
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
+                        contentAlignment = Alignment.Center
                     ) {
                         Image(
                             modifier = Modifier.size(30.dp),
@@ -268,7 +265,7 @@ fun SignInScreen(
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
+                        contentAlignment = Alignment.Center
                     ) {
                         Image(
                             modifier = Modifier.size(30.dp),
@@ -284,6 +281,6 @@ fun SignInScreen(
 
 @Preview
 @Composable
-fun SignInScreenPreview() {
-    SignInScreen()
+fun SignUpScreenPreview() {
+    SignUpScreen()
 }
