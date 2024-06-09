@@ -3,9 +3,9 @@
 Welcome to the Relog test task project! This project serves as an example of building a modern Android application using the latest technologies and best practices.
 
 ## 🖼️ Images
-![Login](login.jpg)
-![Register](register.jpg)
-![Welcome](welcome.jpg)
+![Login](login.jpg) | ![Register](register.jpg) | ![Welcome](welcome.jpg)
+:-------------------------:|:-------------------------:|:-------------------------:
+*Login* | *Register* | *Welcome*
 
 ## 🛠️ Stack
 
