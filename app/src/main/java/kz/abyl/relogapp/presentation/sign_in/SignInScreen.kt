@@ -1,5 +1,6 @@
 package kz.abyl.relogapp.presentation.sign_in
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,8 +26,12 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +54,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.abyl.relogapp.R
 import kz.abyl.relogapp.presentation.navigation.Screen
+import kz.abyl.relogapp.presentation.util.ErrorSnackBar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -56,13 +62,33 @@ fun SignInScreen(
     viewModel: SignInViewModel = koinViewModel(),
     navController: NavController
 ) {
+
+    val state by viewModel.uiState.collectAsState()
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    Scaffold { padding ->
+    var snackBarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(key1 = state.error) {
+        if (state.error != null) {
+            snackBarHostState.showSnackbar(state.error!!)
+        }
+    }
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackBarHostState,
+            ) {
+                ErrorSnackBar(message = state.error ?: "Unknown Error")
+            }
+        }
+    ) { padding ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(padding)
                 .background(Color.White)
         ) {
@@ -163,7 +189,7 @@ fun SignInScreen(
                 Text(
                     text = "Forgot Password?",
                     color = colorResource(id = R.color.blue),
-                    modifier = Modifier.align(Alignment.End) // Align the text to the bottom end
+                    modifier = Modifier.align(Alignment.End)
                 )
             }
             Box(
@@ -305,6 +331,6 @@ fun SignInScreen(
 @Composable
 fun SignInScreenPreview() {
     SignInScreen(
-        navController =  rememberNavController()
+        navController = rememberNavController()
     )
 }

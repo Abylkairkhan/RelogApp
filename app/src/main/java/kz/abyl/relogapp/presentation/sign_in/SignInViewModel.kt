@@ -20,6 +20,18 @@ class SignInViewModel(
     }
 
     private fun logInButtonClicked(email: String, password: String) {
+        if (email.isBlank()) _uiState.value =
+            _uiState.value.copy(
+                error = "Please enter email",
+                isLoading = false
+            )
+        else if (password.isBlank()) _uiState.value =
+            _uiState.value.copy(
+                error = "Please enter password",
+                isLoading = false
+            )
+        else {
 
+        }
     }
 }
