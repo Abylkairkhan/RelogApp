@@ -1,6 +1,5 @@
 package kz.abyl.relogapp.presentation.sign_up
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -53,7 +52,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.abyl.relogapp.R
-import kz.abyl.relogapp.presentation.util.ErrorSnackBar
+import kz.abyl.relogapp.util.ErrorSnackBar
+import kz.abyl.relogapp.util.SuccessSnackBar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -69,11 +69,20 @@ fun SignUpScreen(
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     var confirmPasswordVisibility by remember { mutableStateOf(false) }
-    var snackBarHostState = remember { SnackbarHostState() }
+    var errorSnackBarHostState = remember { SnackbarHostState() }
+    var successSnackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(key1 = state.error) {
         if (state.error != null) {
-            snackBarHostState.showSnackbar(state.error!!)
+            errorSnackBarHostState.showSnackbar(state.error!!)
+        }
+    }
+
+    LaunchedEffect(key1 = state.success) {
+        if (state.success) {
+            successSnackBarHostState.showSnackbar("Registration successful!")
+            successSnackBarHostState.currentSnackbarData?.dismiss()
+            navController.popBackStack()
         }
     }
 
@@ -82,9 +91,14 @@ fun SignUpScreen(
             .fillMaxSize(),
         snackbarHost = {
             SnackbarHost(
-                hostState = snackBarHostState,
+                hostState = errorSnackBarHostState,
             ) {
                 ErrorSnackBar(message = state.error ?: "Unknown Error")
+            }
+            SnackbarHost(
+                hostState = successSnackBarHostState
+            ) {
+                SuccessSnackBar(message = "Successfully registered!")
             }
         }
     ) { padding ->
@@ -246,21 +260,32 @@ fun SignUpScreen(
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color.White),
                     onClick = {
-                        viewModel.onEvent(
-                            SignUpEvent.RegisterButtonClicked(
-                                email = email,
-                                password = password,
-                                repeatPassword = confirmPassword
+                        if (!state.isLoading) {
+                            viewModel.onEvent(
+                                SignUpEvent.RegisterButtonClicked(
+                                    email = email,
+                                    password = password,
+                                    repeatPassword = confirmPassword
+                                )
                             )
-                        )
+                        }
                     }
                 ) {
-                    Text(
-                        text = "Register",
-                        fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                        fontSize = 24.sp,
-                        color = Color.White
-                    )
+                    if (!state.isLoading) {
+                        Text(
+                            text = "Register",
+                            fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                            fontSize = 24.sp,
+                            color = Color.White
+                        )
+                    } else {
+                        Text(
+                            text = "Loading...",
+                            fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                            fontSize = 24.sp,
+                            color = Color.White
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier

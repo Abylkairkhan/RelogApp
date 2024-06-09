@@ -1,4 +1,4 @@
-package kz.abyl.relogapp.presentation.util
+package kz.abyl.relogapp.util
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

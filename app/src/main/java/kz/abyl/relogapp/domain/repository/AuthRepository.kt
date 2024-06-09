@@ -1,11 +1,17 @@
 package kz.abyl.relogapp.domain.repository
 
-interface AuthRepository {
-    suspend fun signUp(email: String, password: String)
-//    : Resource<FirebaseUser>
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.flow.Flow
+import kz.abyl.relogapp.util.Resource
 
-    suspend fun signIn(email: String, password: String)
-//    : Resource<FirebaseUser>
+interface AuthRepository {
+
+    suspend fun signUp(email: String, password: String): Flow<Resource<FirebaseUser>>
+
+    suspend fun signIn(email: String, password: String): Flow<Resource<FirebaseUser>>
+
+    suspend fun signOut(): Boolean
 
     suspend fun checkCurrentUser(): Boolean
+
 }

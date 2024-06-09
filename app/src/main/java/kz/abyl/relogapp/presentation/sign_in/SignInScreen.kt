@@ -54,7 +54,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.abyl.relogapp.R
 import kz.abyl.relogapp.presentation.navigation.Screen
-import kz.abyl.relogapp.presentation.util.ErrorSnackBar
+import kz.abyl.relogapp.util.ErrorSnackBar
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
