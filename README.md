@@ -1,7 +1,3 @@
-Sure! Here is a beautifully crafted `README.md` for your Relog test task project on GitHub:
-
----
-
 # Relog Test Task
 
 Welcome to the Relog test task project! This project serves as an example of building a modern Android application using the latest technologies and best practices.
