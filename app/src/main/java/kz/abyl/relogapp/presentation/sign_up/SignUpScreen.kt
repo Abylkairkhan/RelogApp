@@ -44,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -158,7 +159,10 @@ fun SignUpScreen(
                         focusedBorderColor = colorResource(id = R.color.blue),
                         unfocusedBorderColor = colorResource(id = R.color.blue),
                     ),
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Done
+                    )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
@@ -180,7 +184,10 @@ fun SignUpScreen(
                         focusedBorderColor = colorResource(id = R.color.blue),
                         unfocusedBorderColor = colorResource(id = R.color.blue),
                     ),
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
                     visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     trailingIcon = {
                         val visibilityIcon =

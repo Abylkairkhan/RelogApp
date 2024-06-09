@@ -1,6 +1,5 @@
 package kz.abyl.relogapp.presentation.sign_in
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -45,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -73,6 +73,14 @@ fun SignInScreen(
     LaunchedEffect(key1 = state.error) {
         if (state.error != null) {
             snackBarHostState.showSnackbar(state.error!!)
+        }
+    }
+
+    LaunchedEffect(key1 = state.success) {
+        if (state.success) {
+            navController.navigate(Screen.Welcome.route) {
+                popUpTo(0)
+            }
         }
     }
 
@@ -143,7 +151,10 @@ fun SignInScreen(
                         focusedBorderColor = colorResource(id = R.color.blue),
                         unfocusedBorderColor = colorResource(id = R.color.blue),
                     ),
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Done
+                    )
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
@@ -165,7 +176,10 @@ fun SignInScreen(
                         focusedBorderColor = colorResource(id = R.color.blue),
                         unfocusedBorderColor = colorResource(id = R.color.blue),
                     ),
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
                     visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     trailingIcon = {
                         val visibilityIcon =
@@ -211,20 +225,31 @@ fun SignInScreen(
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color.White),
                     onClick = {
-                        viewModel.onEvent(
-                            SignInEvent.LogInButtonClicked(
-                                email = email,
-                                password = password
+                        if (!state.isLoading) {
+                            viewModel.onEvent(
+                                SignInEvent.LogInButtonClicked(
+                                    email = email,
+                                    password = password
+                                )
                             )
-                        )
+                        }
                     }
                 ) {
-                    Text(
-                        text = "Login",
-                        fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                        fontSize = 24.sp,
-                        color = Color.White
-                    )
+                    if (!state.isLoading) {
+                        Text(
+                            text = "Login",
+                            fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                            fontSize = 24.sp,
+                            color = Color.White
+                        )
+                    } else {
+                        Text(
+                            text = "Loading...",
+                            fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                            fontSize = 24.sp,
+                            color = Color.White
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier

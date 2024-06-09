@@ -1,10 +1,13 @@
 package kz.abyl.relogapp.presentation.sign_in
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kz.abyl.relogapp.domain.repository.AuthRepository
+import kz.abyl.relogapp.util.Resource
 
 class SignInViewModel(
     private val repository: AuthRepository
@@ -31,7 +34,35 @@ class SignInViewModel(
                 isLoading = false
             )
         else {
+            viewModelScope.launch {
+                repository.signIn(email, password).collect { response ->
+                    when (response) {
+                        is Resource.Success -> {
+                            _uiState.value =
+                                _uiState.value.copy(
+                                    success = true,
+                                    error = null,
+                                    isLoading = false
+                                )
+                        }
 
+                        is Resource.Error -> {
+                            _uiState.value =
+                                _uiState.value.copy(
+                                    error = response.message,
+                                    isLoading = false
+                                )
+                        }
+
+                        is Resource.Loading -> {
+                            _uiState.value =
+                                _uiState.value.copy(
+                                    isLoading = response.isLoading
+                                )
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -25,7 +25,16 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun signIn(email: String, password: String): Flow<Resource<FirebaseUser>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            try {
+                val result = authApi.signInWithEmailAndPassword(email, password).await()
+                emit(Resource.Success(result.user))
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message ?: "Unexpected error"))
+            }
+            emit(Resource.Loading(isLoading = false))
+        }
     }
 
     override suspend fun signOut(): Boolean {
