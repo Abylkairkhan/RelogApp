@@ -24,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,237 +45,255 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kz.abyl.relogapp.R
+import kz.abyl.relogapp.presentation.navigation.Screen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SignInScreen(
-
+    viewModel: SignInViewModel = koinViewModel(),
+    navController: NavController
 ) {
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        Box(
-            modifier = Modifier
-                .weight(0.5f)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.rectangle_1),
-                contentDescription = "rectangle_1",
-                contentScale = ContentScale.Crop
-            )
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.rectangle_2),
-                contentDescription = "rectangle_2",
-                contentScale = ContentScale.Crop
-            )
-        }
+    Scaffold { padding ->
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.3f)
-                .padding(horizontal = 12.dp)
+                .fillMaxSize()
+                .padding(padding)
+                .background(Color.White)
         ) {
-            Text(
-                text = "Login",
-                fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                fontSize = 36.sp,
-                color = colorResource(id = R.color.blue)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+            ) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.rectangle_1),
+                    contentDescription = "rectangle_1",
+                    contentScale = ContentScale.Crop
+                )
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.rectangle_2),
+                    contentDescription = "rectangle_2",
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp),
-                value = username,
-                onValueChange = {
-                    username = it
-                },
-                singleLine = true,
-                label = {
-                    Text(
-                        text = "Email",
-                        color = colorResource(id = R.color.blue)
-                    )
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorResource(id = R.color.blue),
-                    unfocusedBorderColor = colorResource(id = R.color.blue),
-                ),
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                value = password,
-                onValueChange = {
-                    password = it
-                },
-                singleLine = true,
-                label = {
-                    Text(
-                        text = "Password",
-                        color = colorResource(id = R.color.blue)
-                    )
-                },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = colorResource(id = R.color.blue),
-                    unfocusedBorderColor = colorResource(id = R.color.blue),
-                ),
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    val visibilityIcon = if (passwordVisibility) painterResource(id = R.drawable.visibility_off_icon) else painterResource(id = R.drawable.visibility_icon)
-                    IconButton(
-                        onClick = { passwordVisibility = !passwordVisibility }
-                    ) {
-                        Icon(
-                            modifier = Modifier
-                                .size(32.dp),
-                            painter = visibilityIcon,
-                            contentDescription = "Password Visibility",
-                            tint = colorResource(id = R.color.blue)
-                        )
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "Forgot Password?",
-                color = colorResource(id = R.color.blue),
-                modifier = Modifier.align(Alignment.End) // Align the text to the bottom end
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.20f)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.rectangle_3),
-                contentDescription = "rectangle_3",
-                contentScale = ContentScale.Crop
-            )
-            OutlinedButton(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(16.dp),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color.White),
-                onClick = { /*TODO*/ }
+                    .weight(0.4f)
+                    .padding(horizontal = 12.dp)
             ) {
                 Text(
                     text = "Login",
                     fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                    fontSize = 24.sp,
-                    color = Color.White
+                    fontSize = 36.sp,
+                    color = colorResource(id = R.color.blue)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    singleLine = true,
+                    label = {
+                        Text(
+                            text = "Email",
+                            color = colorResource(id = R.color.blue)
+                        )
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = colorResource(id = R.color.blue),
+                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                    ),
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    value = password,
+                    onValueChange = {
+                        password = it
+                    },
+                    singleLine = true,
+                    label = {
+                        Text(
+                            text = "Password",
+                            color = colorResource(id = R.color.blue)
+                        )
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = colorResource(id = R.color.blue),
+                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                    ),
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val visibilityIcon =
+                            if (passwordVisibility) painterResource(id = R.drawable.visibility_off_icon) else painterResource(
+                                id = R.drawable.visibility_icon
+                            )
+                        IconButton(
+                            onClick = { passwordVisibility = !passwordVisibility }
+                        ) {
+                            Icon(
+                                modifier = Modifier
+                                    .size(32.dp),
+                                painter = visibilityIcon,
+                                contentDescription = "Password Visibility",
+                                tint = colorResource(id = R.color.blue)
+                            )
+                        }
+                    }
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "Forgot Password?",
+                    color = colorResource(id = R.color.blue),
+                    modifier = Modifier.align(Alignment.End) // Align the text to the bottom end
                 )
             }
-            Row(
+            Box(
                 modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .weight(0.2f)
             ) {
-                Text(
-                    text = "New Here?",
-                    fontFamily = FontFamily(Font(R.font.nunito_medium)),
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.width(7.dp))
-                Text(
+                Image(
                     modifier = Modifier
-                        .clickable {
-                            TODO()
-                        },
-                    text = "Register",
-                    fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                    fontSize = 16.sp,
-                    color = Color.White
+                        .fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.rectangle_3),
+                    contentDescription = "rectangle_3",
+                    contentScale = ContentScale.Crop
                 )
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(horizontal = 12.dp)
-                    .width(160.dp)
-            ) {
-                Card(
+                OutlinedButton(
                     modifier = Modifier
-                        .size(45.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 10.dp
-                    ),
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
-                    ) {
-                        Image(
-                            modifier = Modifier.size(30.dp),
-                            painter = painterResource(id = R.drawable.google_icon),
-                            contentDescription = "google_icon"
+                        .align(Alignment.BottomEnd)
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, Color.White),
+                    onClick = {
+                        viewModel.onEvent(
+                            SignInEvent.LogInButtonClicked(
+                                email = email,
+                                password = password
+                            )
                         )
                     }
-                }
-                Card(
-                    modifier = Modifier
-                        .size(45.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 10.dp
-                    ),
-                    shape = RoundedCornerShape(5.dp)
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
+                    Text(
+                        text = "Login",
+                        fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                        fontSize = 24.sp,
+                        color = Color.White
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = "New Here?",
+                        fontFamily = FontFamily(Font(R.font.nunito_medium)),
+                        fontSize = 16.sp,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(7.dp))
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                navController.navigate(Screen.SignUp.route)
+                            },
+                        text = "Register",
+                        fontFamily = FontFamily(Font(R.font.nunito_semibold)),
+                        fontSize = 16.sp,
+                        color = Color.White
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .padding(horizontal = 12.dp)
+                        .width(160.dp)
+                ) {
+                    Card(
+                        modifier = Modifier
+                            .size(45.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        elevation = CardDefaults.cardElevation(
+                            defaultElevation = 10.dp
+                        ),
+                        shape = RoundedCornerShape(5.dp)
                     ) {
-                        Image(
-                            modifier = Modifier.size(30.dp),
-                            painter = painterResource(id = R.drawable.facebook_icon),
-                            contentDescription = "facebook_icon"
-                        )
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center // Center the content
+                        ) {
+                            Image(
+                                modifier = Modifier.size(30.dp),
+                                painter = painterResource(id = R.drawable.google_icon),
+                                contentDescription = "google_icon"
+                            )
+                        }
                     }
-                }
-                Card(
-                    modifier = Modifier
-                        .size(45.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 10.dp
-                    ),
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center // Center the content
+                    Card(
+                        modifier = Modifier
+                            .size(45.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        elevation = CardDefaults.cardElevation(
+                            defaultElevation = 10.dp
+                        ),
+                        shape = RoundedCornerShape(5.dp)
                     ) {
-                        Image(
-                            modifier = Modifier.size(30.dp),
-                            painter = painterResource(id = R.drawable.apple_icon),
-                            contentDescription = "apple_icon"
-                        )
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center // Center the content
+                        ) {
+                            Image(
+                                modifier = Modifier.size(30.dp),
+                                painter = painterResource(id = R.drawable.facebook_icon),
+                                contentDescription = "facebook_icon"
+                            )
+                        }
+                    }
+                    Card(
+                        modifier = Modifier
+                            .size(45.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
+                        elevation = CardDefaults.cardElevation(
+                            defaultElevation = 10.dp
+                        ),
+                        shape = RoundedCornerShape(5.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Image(
+                                modifier = Modifier.size(30.dp),
+                                painter = painterResource(id = R.drawable.apple_icon),
+                                contentDescription = "apple_icon"
+                            )
+                        }
                     }
                 }
             }
@@ -285,5 +304,7 @@ fun SignInScreen(
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen()
+    SignInScreen(
+        navController =  rememberNavController()
+    )
 }
