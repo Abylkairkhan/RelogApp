@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RelogApp</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="login">Войти</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="loading">Загрузка...</string>
+    <string name="new_here">Впервые здесь?</string>
+    <string name="registration_successful">Регистрация успешна!</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="already_member">Уже зарегистрированы?</string>
+    <string name="hello">Привет, %1$s!</string>
+    <string name="log_out">Выйти</string>
+    <string name="please_enter_email">Пожалуйста, введите электронную почту</string>
+    <string name="please_enter_password">Пожалуйста, введите пароль</string>
+</resources>

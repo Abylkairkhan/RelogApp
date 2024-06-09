@@ -14,12 +14,15 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,11 +31,26 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.abyl.relogapp.R
+import kz.abyl.relogapp.presentation.navigation.Screen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun WelcomeScreen(
+    viewModel: WelcomeViewModel = koinViewModel(),
     navController: NavController
 ) {
+    
+    val email = viewModel.email.collectAsState()
+    val signOut = viewModel.signOut.collectAsState()
+
+    LaunchedEffect(key1 = signOut.value) {
+        if(signOut.value) {
+            navController.navigate(Screen.SignIn.route) {
+                popUpTo(0)
+            }
+        }
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +98,7 @@ fun WelcomeScreen(
                     color = colorResource(id = R.color.blue)
                 )
                 Text(
-                    text = "Hello, User!",
+                    text = stringResource(R.string.hello, email.value),
                     fontFamily = FontFamily(Font(R.font.nunito_medium)),
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.blue)
@@ -105,11 +123,11 @@ fun WelcomeScreen(
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color.White),
                     onClick = {
-
+                        viewModel.signOut()
                     }
                 ) {
                     Text(
-                        text = "Log Out",
+                        text = stringResource(R.string.log_out),
                         fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                         fontSize = 24.sp,
                         color = Color.White

@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
@@ -81,7 +82,7 @@ fun SignUpScreen(
 
     LaunchedEffect(key1 = state.success) {
         if (state.success) {
-            successSnackBarHostState.showSnackbar("Registration successful!")
+            val showSnackbar = successSnackBarHostState.showSnackbar("Registration successful!")
             successSnackBarHostState.currentSnackbarData?.dismiss()
             navController.popBackStack()
         }
@@ -94,12 +95,12 @@ fun SignUpScreen(
             SnackbarHost(
                 hostState = errorSnackBarHostState,
             ) {
-                ErrorSnackBar(message = state.error ?: "Unknown Error")
+                ErrorSnackBar(message = state.error ?: stringResource(id = R.string.unknown_error))
             }
             SnackbarHost(
                 hostState = successSnackBarHostState
             ) {
-                SuccessSnackBar(message = "Successfully registered!")
+                SuccessSnackBar(message = stringResource(id = R.string.registration_successful))
             }
         }
     ) { padding ->
@@ -134,9 +135,9 @@ fun SignUpScreen(
                     .padding(horizontal = 12.dp)
             ) {
                 Text(
-                    text = "Register",
+                    text = stringResource(id = R.string.register),
                     fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                    fontSize = 36.sp,
+                    fontSize = 32.sp,
                     color = colorResource(id = R.color.blue)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -151,7 +152,7 @@ fun SignUpScreen(
                     singleLine = true,
                     label = {
                         Text(
-                            text = "Email",
+                            text = stringResource(id = R.string.email),
                             color = colorResource(id = R.color.blue)
                         )
                     },
@@ -176,7 +177,7 @@ fun SignUpScreen(
                     singleLine = true,
                     label = {
                         Text(
-                            text = "Password",
+                            text = stringResource(id = R.string.password),
                             color = colorResource(id = R.color.blue)
                         )
                     },
@@ -219,7 +220,7 @@ fun SignUpScreen(
                     singleLine = true,
                     label = {
                         Text(
-                            text = "Confirm password",
+                            text = stringResource(R.string.confirm_password),
                             color = colorResource(id = R.color.blue)
                         )
                     },
@@ -263,7 +264,7 @@ fun SignUpScreen(
                 OutlinedButton(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(16.dp),
+                        .padding(end = 12.dp, bottom = 32.dp),
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color.White),
                     onClick = {
@@ -280,16 +281,16 @@ fun SignUpScreen(
                 ) {
                     if (!state.isLoading) {
                         Text(
-                            text = "Register",
+                            text = stringResource(id = R.string.register),
                             fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                            fontSize = 24.sp,
+                            fontSize = 18.sp,
                             color = Color.White
                         )
                     } else {
                         Text(
-                            text = "Loading...",
+                            text = stringResource(id = R.string.loading),
                             fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                            fontSize = 24.sp,
+                            fontSize = 18.sp,
                             color = Color.White
                         )
                     }
@@ -297,21 +298,21 @@ fun SignUpScreen(
                 Row(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .padding(16.dp)
+                        .padding(8.dp)
                 ) {
                     Text(
-                        text = "Already Member?",
+                        text = stringResource(R.string.already_member),
                         fontFamily = FontFamily(Font(R.font.nunito_medium)),
                         fontSize = 16.sp,
                         color = Color.White
                     )
-                    Spacer(modifier = Modifier.width(7.dp))
+                    Spacer(modifier = Modifier.width(3.dp))
                     Text(
                         modifier = Modifier
                             .clickable {
                                 navController.popBackStack()
                             },
-                        text = "Login",
+                        text = stringResource(R.string.login),
                         fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                         fontSize = 16.sp,
                         color = Color.White

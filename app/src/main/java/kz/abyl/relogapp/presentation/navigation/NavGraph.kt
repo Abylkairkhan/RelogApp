@@ -13,11 +13,12 @@ import kz.abyl.relogapp.presentation.welcome.WelcomeScreen
 
 @Composable
 fun NavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    isUserLoggedIn: Boolean
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SignIn.route
+        startDestination = if (isUserLoggedIn) Screen.Welcome.route else Screen.SignIn.route
     ) {
         composable(
             route = Screen.SignIn.route

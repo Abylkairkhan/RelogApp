@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
@@ -91,7 +92,7 @@ fun SignInScreen(
             SnackbarHost(
                 hostState = snackBarHostState,
             ) {
-                ErrorSnackBar(message = state.error ?: "Unknown Error")
+                ErrorSnackBar(message = state.error ?: stringResource(R.string.unknown_error))
             }
         }
     ) { padding ->
@@ -126,7 +127,7 @@ fun SignInScreen(
                     .padding(horizontal = 12.dp)
             ) {
                 Text(
-                    text = "Login",
+                    text = stringResource(R.string.login),
                     fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                     fontSize = 36.sp,
                     color = colorResource(id = R.color.blue)
@@ -143,7 +144,7 @@ fun SignInScreen(
                     singleLine = true,
                     label = {
                         Text(
-                            text = "Email",
+                            text = stringResource(R.string.email),
                             color = colorResource(id = R.color.blue)
                         )
                     },
@@ -168,7 +169,7 @@ fun SignInScreen(
                     singleLine = true,
                     label = {
                         Text(
-                            text = "Password",
+                            text = stringResource(R.string.password),
                             color = colorResource(id = R.color.blue)
                         )
                     },
@@ -201,7 +202,7 @@ fun SignInScreen(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "Forgot Password?",
+                    text = stringResource(R.string.forgot_password),
                     color = colorResource(id = R.color.blue),
                     modifier = Modifier.align(Alignment.End)
                 )
@@ -237,14 +238,14 @@ fun SignInScreen(
                 ) {
                     if (!state.isLoading) {
                         Text(
-                            text = "Login",
+                            text = stringResource(R.string.login),
                             fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                             fontSize = 24.sp,
                             color = Color.White
                         )
                     } else {
                         Text(
-                            text = "Loading...",
+                            text = stringResource(R.string.loading),
                             fontFamily = FontFamily(Font(R.font.nunito_semibold)),
                             fontSize = 24.sp,
                             color = Color.White
@@ -257,20 +258,20 @@ fun SignInScreen(
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "New Here?",
+                        text = stringResource(R.string.new_here),
                         fontFamily = FontFamily(Font(R.font.nunito_medium)),
-                        fontSize = 16.sp,
+                        fontSize = 12.sp,
                         color = Color.White
                     )
-                    Spacer(modifier = Modifier.width(7.dp))
+                    Spacer(modifier = Modifier.width(3.dp))
                     Text(
                         modifier = Modifier
                             .clickable {
                                 navController.navigate(Screen.SignUp.route)
                             },
-                        text = "Register",
+                        text = stringResource(R.string.register),
                         fontFamily = FontFamily(Font(R.font.nunito_semibold)),
-                        fontSize = 16.sp,
+                        fontSize = 12.sp,
                         color = Color.White
                     )
                 }

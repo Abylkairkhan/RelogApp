@@ -14,4 +14,6 @@ interface AuthRepository {
 
     suspend fun checkCurrentUser(): Boolean
 
+    suspend fun getCurrentUser(): FirebaseUser?
+
 }

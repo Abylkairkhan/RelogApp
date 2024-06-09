@@ -38,10 +38,28 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun signOut(): Boolean {
-        TODO("Not yet implemented")
+        return try {
+            authApi.signOut()
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     override suspend fun checkCurrentUser(): Boolean {
-        TODO("Not yet implemented")
+        return try {
+            val currentUser = authApi.currentUser
+            currentUser != null
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override suspend fun getCurrentUser(): FirebaseUser? {
+        return try {
+            authApi.currentUser
+        } catch (e: Exception) {
+            null
+        }
     }
 }

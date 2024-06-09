@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RelogApp</string>
+    <string name="unknown_error">Белгісіз қате</string>
+    <string name="login">Кіру</string>
+    <string name="email">Электрондық пошта</string>
+    <string name="password">Құпия сөз</string>
+    <string name="forgot_password">Құпия сөзді ұмыттыңыз ба?</string>
+    <string name="loading">Жүктелуде...</string>
+    <string name="new_here">Жаңа қолданушысыз ба?</string>
+    <string name="registration_successful">Тіркелу сәтті аяқталды!</string>
+    <string name="register">Тіркелу</string>
+    <string name="confirm_password">Құпия сөзді растау</string>
+    <string name="already_member">Бұрын тіркелгенсіз бе?</string>
+    <string name="hello">Сәлем, %1$s!</string>
+    <string name="log_out">Шығу</string>
+    <string name="please_enter_email">Электрондық поштаңызды енгізіңіз</string>
+    <string name="please_enter_password">Құпия сөзді енгізіңіз</string>
+</resources>
