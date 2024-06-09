@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847543667511",
+    "project_id": "relog-test-app",
+    "storage_bucket": "relog-test-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847543667511:android:100e357828a93c4bc768b2",
+        "android_client_info": {
+          "package_name": "kz.abyl.relogapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATLBdk8XeTFACq1PCUUlSRDulI4X-mSCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
