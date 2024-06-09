@@ -31,32 +31,6 @@ To get started with the project, follow these steps:
 
 3. **Build and run** the project on an emulator or physical device.
 
-## 📁 Project Structure
-
-Here's a brief overview of the project structure:
-
-```
-relog-test-task/
-│
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/example/relog/
-│   │   │   │   ├── di/        # Dependency injection setup with Koin
-│   │   │   │   ├── ui/        # UI components built with Jetpack Compose
-│   │   │   │   ├── viewmodel/ # ViewModels following the MVVM pattern
-│   │   │   │   └── repository/ # Data repositories
-│   │   │   ├── res/
-│   │   │   │   ├── values/
-│   │   │   │   │   ├── strings.xml        # English strings
-│   │   │   │   │   ├── strings-ru.xml     # Russian strings
-│   │   │   │   │   └── strings-kz.xml     # Kazakh strings
-│   │   │   └── AndroidManifest.xml
-│   └── build.gradle
-│
-└── build.gradle
-```
-
 ## 🌐 Multi-language Support
 
 The application supports three languages:
